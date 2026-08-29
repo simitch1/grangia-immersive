@@ -1,100 +1,43 @@
 # Grangia GSAP Immersive
 
-Prototipo web immersivo derivato dalla presentazione **“Grangia x 40 anni.pptx”**. La presentazione originale viene reinterpretata come una timeline narrativa continua con countdown, musica, pause di riflessione, crossfade audio, immagini e animazioni GSAP.
+Esperienza web immersiva derivata dalla presentazione **“Grangia x 40 anni.pptx”**.
 
-## Avvio rapido
+La sequenza conserva i contenuti principali delle 24 slide originali e li presenta con un linguaggio visivo volutamente neutro. Le sole eccezioni cromatiche sono i quattro foglietti di riflessione. L’unica fotografia utilizzata è quella della Grangia, trattata in scala di grigi nelle schermate di apertura, accoglienza e chiusura.
 
-1. Apri un terminale nella cartella del progetto.
-2. Avvia un server locale:
-   - macOS / Linux: `./start.sh`
-   - Windows: doppio click su `start.bat`
-   - oppure: `python3 -m http.server 8080`
-3. Apri `http://localhost:8080`.
-4. Premi **Inizia il viaggio**. Il click iniziale è necessario per consentire la riproduzione audio nei browser moderni.
+## Avvio
 
-## Struttura
+Il progetto non richiede build né dipendenze da installare. È incluso un piccolo server statico Node.js.
 
-- `index.html` — palco full-screen, controlli, pause interattive.
-- `styles.css` — visual design, tipografia, pannelli, foglietti, responsive.
-- `app.js` — regia GSAP, sequenza narrativa, countdown, timer e crossfade musicali.
-- `assets/audio/` — tre ambienti musicali originali generati per il prototipo:
-  - `soglia.mp3` — riflessivo / introduttivo;
-  - `attraversamento.mp3` — più teso / sospeso;
-  - `approdo.mp3` — più caldo / contemplativo.
-- `assets/img/foglietti-domanda.png` — immagine già presente nel PowerPoint originale.
-- `assets/img/maslow.png` — piramide di Maslow già presente nel PowerPoint originale.
+- Windows: esegui `start.bat`.
+- macOS/Linux: esegui `./start.sh`.
+- Da terminale: `npm start`.
+- In alternativa, avvia un qualsiasi server statico nella cartella e apri `index.html` tramite HTTP.
 
-## Logica dell’esperienza
+L’uso di un server locale è necessario per una riproduzione audio affidabile. GSAP è incluso localmente in `assets/vendor/gsap.min.js`, quindi l’esperienza può essere presentata senza connessione internet.
 
-La timeline segue la traccia originale:
+## Funzionamento
 
-- countdown e introduzione;
-- pensiero sulla propria vita;
-- emergenza e decisione di partire;
-- foglietto rosso e foglietto arancione con pausa minima;
-- viaggio, arrivo, stanchezza, lingua e disorientamento;
-- accesso al centro di accoglienza;
-- foglietto giallo e riflessione sui bisogni;
-- piramide di Maslow;
-- burocrazia, lingua, lavoro, famiglia;
-- foglietto azzurro;
-- epilogo e ringraziamento.
+- Il pulsante iniziale sblocca l’audio e avvia un conto alla rovescia.
+- Le schermate narrative avanzano automaticamente.
+- I checkpoint di riflessione avanzano solo dopo il click del partecipante; alcuni prevedono un breve tempo minimo.
+- I controlli consentono di mettere in pausa, tornare indietro, andare avanti, uscire, regolare l’audio e attivare lo schermo intero.
+- La pagina finale contiene il pulsante **Ricomincia**.
+- In **modalità presentatore**, la pagina finale torna automaticamente alla home dopo 20 secondi.
+- La modalità presentatore può essere preattivata anche con `?presenter=1` nell’URL.
 
-Le pause sui foglietti hanno un **tempo minimo** ma non un tempo massimo: il partecipante continua quando è pronto. È una scelta più coerente con la natura riflessiva della traccia rispetto a un autoplay rigido.
+## Tastiera
 
-## Fonti visive
+- `←` / `→`: schermata precedente o successiva.
+- `Spazio`: pausa/riprendi.
+- `M`: audio on/off.
+- `F`: schermo intero.
 
-### La Grangia di Monluè
+## Audio
 
-Il progetto usa come riferimento il sito ufficiale:
-- https://www.lagrangiadimonlue.org/
-- logo: `https://www.lagrangiadimonlue.org/wp-content/uploads/2014/08/logo-small-2.png`
-- Casa di accoglienza: `https://www.lagrangiadimonlue.org/wp-content/uploads/2015/09/edificio-grangia.jpg`
+La regia usa esclusivamente le tracce richieste:
 
-Nel prototipo queste risorse sono caricate da remoto. Per un’installazione offline, scaricarle localmente previa verifica dei diritti d’uso con l’associazione e aggiornare le URL in `index.html` / `app.js`.
+- `assets/audio/new1.mp3`: apertura;
+- `assets/audio/new2.mp3`: partenza, viaggio e arrivo;
+- `assets/audio/new3.mp3`: accoglienza, riflessione e chiusura.
 
-### Fotografie narrative — Unsplash
-
-Il prototipo usa fotografie gratuite come riferimenti visivi narrativi:
-- Jason Leung — “Man with suitcase on empty train station platform”  
-  https://unsplash.com/photos/ZGB-D4ogbfc
-- felkhadri — persona su una piattaforma ferroviaria  
-  https://unsplash.com/photos/O4uf3Hpn4-U
-- Milano di notte — riferimento fotografico  
-  https://unsplash.com/photos/a4_k6rvqY80
-- Nguyen Dang Hoang Nhu — scrittura su quaderno  
-  https://unsplash.com/photos/XVtWhPS-hic
-
-Le immagini vengono caricate direttamente da `images.unsplash.com`. Per l’uso definitivo in una mostra/installazione si consiglia di scaricare e archiviare i file localmente, mantenendo i crediti e verificando la licenza applicabile al momento del download.
-
-## GSAP
-
-Il prototipo carica GSAP da CDN:
-
-`https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js`
-
-Per una postazione **offline**, scaricare `gsap.min.js` in `assets/vendor/` e sostituire lo `<script>` in `index.html` con:
-
-```html
-<script src="assets/vendor/gsap.min.js"></script>
-```
-
-## Note per la messa in produzione
-
-- Usare Chrome/Edge in modalità kiosk o fullscreen.
-- Disabilitare sleep/salvaschermo del sistema operativo.
-- Collegare l’uscita audio direttamente all’impianto della stanza e fare un sound check sui livelli reali.
-- Per installazione offline: portare localmente **GSAP, logo, foto e font**.
-- Se deve partire automaticamente all’accensione, configurare il browser in kiosk ma mantenere un primo gesto dell’utente oppure usare una shell desktop (Electron) che gestisca l’audio in modo più prevedibile.
-- Se serve un pulsante fisico, si può collegare un controller USB che invii un tasto e usarlo al posto del click su “Continua”.
-
-## Personalizzazione tempi
-
-Tutti i tempi sono in `app.js`, nell’array `scenes`:
-
-```js
-{ id: 'viaggio', seconds: 12, ... }
-{ type: 'reflection', id: 'rosso', seconds: 24, ... }
-```
-
-Per le scene normali `seconds` = permanenza prima della transizione automatica. Per le riflessioni `seconds` = **tempo minimo** prima dell’abilitazione del pulsante.
+Il passaggio indicato nella presentazione con “Musica sfuma e si ferma” viene rispettato prima della partenza.
