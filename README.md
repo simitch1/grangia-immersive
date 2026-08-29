@@ -41,3 +41,15 @@ La regia usa esclusivamente le tracce richieste:
 - `assets/audio/new3.mp3`: accoglienza, riflessione e chiusura.
 
 Il passaggio indicato nella presentazione con “Musica sfuma e si ferma” viene rispettato prima della partenza.
+
+## Pubblicazione su GitHub Pages
+
+Il workflow `.github/workflows/pages.yml` pubblica una whitelist dei soli file necessari al sito. PowerPoint, server locale, documentazione, tracce precedenti e immagini inutilizzate non entrano nell’artefatto pubblico.
+
+Per verificare localmente il contenuto che verrà distribuito:
+
+```bash
+npm run build:pages
+```
+
+L’output viene creato in `dist-pages/` ed è escluso da Git. Nel repository GitHub, imposta una sola volta **Settings → Pages → Source → GitHub Actions**. Ogni push successivo su `main` avvierà automaticamente la pubblicazione; è possibile avviarla anche manualmente dalla sezione **Actions**.
