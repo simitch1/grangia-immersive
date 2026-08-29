@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#0a0d10" />
+  <title>La Grangia di Monluè — Un viaggio immaginario</title>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+  <link rel="preconnect" href="https://images.unsplash.com" />
+  <link rel="preconnect" href="https://www.lagrangiadimonlue.org" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main id="app" aria-live="polite">
+    <div class="bg-stack" aria-hidden="true">
+      <div id="bgA" class="bg-layer"></div>
+      <div id="bgB" class="bg-layer"></div>
+      <div class="grain"></div>
+      <div class="vignette"></div>
+    </div>
+
+    <header class="hud">
+      <div class="brand-lockup">
+        <img
+          class="brand-logo"
+          src="https://www.lagrangiadimonlue.org/wp-content/uploads/2014/08/logo-small-2.png"
+          alt="La Grangia di Monluè"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-flex';"
+        />
+        <span class="brand-fallback">LA GRANGIA DI MONLUÈ</span>
+      </div>
+      <div class="hud-actions">
+        <button id="muteBtn" class="icon-btn" type="button" aria-label="Attiva o disattiva l'audio">Audio</button>
+        <button id="fullscreenBtn" class="icon-btn" type="button" aria-label="Schermo intero">Schermo intero</button>
+      </div>
+    </header>
+
+    <div class="progress-track" aria-hidden="true"><div id="progressBar" class="progress-bar"></div></div>
+
+    <section id="stage" class="stage">
+      <div id="content" class="content-shell">
+        <p id="kicker" class="kicker"></p>
+        <h1 id="title" class="title"></h1>
+        <div id="body" class="body-copy"></div>
+        <p id="aside" class="aside"></p>
+      </div>
+
+      <div id="visualCard" class="visual-card" hidden>
+        <img id="visualImage" src="" alt="" />
+      </div>
+
+      <div id="reflection" class="reflection" hidden>
+        <div id="reflectionPaper" class="paper-card">
+          <span id="paperLabel" class="paper-label"></span>
+          <h2 id="paperQuestion" class="paper-question"></h2>
+          <p id="paperHint" class="paper-hint"></p>
+          <div class="pause-status">
+            <div class="timer-ring"><span id="timerValue">0</span></div>
+            <span id="timerText">Tempo di riflessione</span>
+          </div>
+          <button id="continueBtn" class="primary-btn" type="button" disabled>Continua il viaggio</button>
+        </div>
+      </div>
+
+      <div id="countdown" class="countdown" hidden>
+        <span id="countdownValue">5</span>
+      </div>
+
+      <div id="startScreen" class="start-screen">
+        <div class="start-card">
+          <p class="eyebrow">40 anni • La Grangia di Monluè</p>
+          <h1>Un viaggio immaginario</h1>
+          <p>
+            Un’esperienza riflessiva ispirata alla traccia della presentazione originale. Ci saranno momenti di ascolto,
+            silenzio e domande personali. Puoi fermarti quando vuoi.
+          </p>
+          <p class="small-note">L’audio parte dopo il tuo click, come richiesto dai browser moderni.</p>
+          <button id="startBtn" class="primary-btn" type="button">Inizia il viaggio</button>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer-note">
+      <span id="sceneLabel">Pronto</span>
+      <span class="keys">M = audio · F = fullscreen</span>
+    </footer>
+  </main>
+
+  <audio id="audioSoglia" src="assets/audio/soglia.mp3" preload="auto" loop></audio>
+  <audio id="audioAttraversamento" src="assets/audio/attraversamento.mp3" preload="auto" loop></audio>
+  <audio id="audioApprodo" src="assets/audio/approdo.mp3" preload="auto" loop></audio>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
